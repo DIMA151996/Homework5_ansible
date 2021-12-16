@@ -1,7 +1,3 @@
-#########################################################
-# DO Community Playbooks: Wordpress on Ubuntu 18.04 LAMP
-#########################################################
----
 - hosts: all
   become: true
   vars_files:
@@ -96,17 +92,6 @@
         login_user: root
         login_password: "{{ mysql_root_password }}"
       tags: [ mysql ]
-
-    - name: Copy database dump file
-      copy:
-        src: infocyga_wp432.sql
-        dest: /
-
-    - name: Restore database
-      community.mysql.mysql_db:
-         name: "{{ mysql_db }}"
-         state: import
-         target: /infocyga_wp432.sql
 
   # UFW Configuration
     - name: "UFW - Allow HTTP on port {{ http_port }}"
